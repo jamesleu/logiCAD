@@ -110,6 +110,7 @@ public class GUI {
 	private static final int CANCEL_BUTTON = 3;
 	private static final int PARENT_SELECTED = 4;
 	private static final int TOGGLE_INPUT_BUTTON = 5;
+	private boolean evaluateOnDelete = false;
 	
 //	private JComponent contentPane;
 	
@@ -426,6 +427,7 @@ public class GUI {
 				            	g2.draw(w.getLine2());
 				            	g2.draw(w.getLine3());
 				            }
+				            
 		
 				    	}// end paint component method
 
@@ -611,8 +613,8 @@ public class GUI {
 				        		optionButtons = INVALID;
 				        	}
 			        		b = false;
-				        	
-				        	
+
+							evaluateOnDelete = true;
 				        }
 				        
 				        else if(optionButtons == CONNECT_BUTTON) {
@@ -729,7 +731,7 @@ public class GUI {
 				        			JOptionPane.showMessageDialog(frame, "Output element is already fully connected!");
 				        		}
 				        		else if(connectionSuccessful == 6) {
-				        			JOptionPane.showMessageDialog(frame, "The Gate is already fully connected!");
+				        			JOptionPane.showMessageDialog(frame, "The Gate has no free inputs!");
 				        		}
 				        		
 				        		optionButtons = INVALID;
@@ -1152,13 +1154,12 @@ public class GUI {
 				}
 				
 				if(!canWeEvaluate) {
-
 					JLabel errorDialog = new JLabel();
 					errorDialog.setHorizontalTextPosition(SwingConstants.CENTER);
 					errorDialog.setVerticalTextPosition(SwingConstants.NORTH);
 					errorDialog.setVerticalAlignment(SwingConstants.NORTH);
 					errorDialog.setText("<html> <font size=4> The circuit has missing connections and cannot be evaluated! Please complete the circuit.<br>All output values will now be set to X </font></html>");
-					JOptionPane.showMessageDialog(null,errorDialog, "Error!", 0, null);
+					JOptionPane.showMessageDialog(null,errorDialog, "Error!", 0, null);	
 					
 					//elementImageTypes
 					
